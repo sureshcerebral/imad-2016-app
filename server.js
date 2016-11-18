@@ -83,16 +83,14 @@ function CreateTemplate(data){
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
-app.get('/articleone', function (req, res) {
-  res.send(CreateTemplate(articleOne));
-});
-app.get('/articletwo', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui', 'articletwo.html'));
-});
-app.get('/articlethree', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui', 'articlethree.html'));
-});
 
+app.get('/:articleName', function (req, res) {
+    //articleName refers to the object names like articleOne etc..
+    // eg - articleName == articleOne;
+    //articles[articleName] = {} gives the content of articleOne object  
+  var articleName = req.params.articleName;
+  res.send(CreateTemplate(articles[articleName]));
+});
 
 app.get('/ui/style.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'style.css'));
