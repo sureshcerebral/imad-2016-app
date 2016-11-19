@@ -10,7 +10,7 @@ button.onclick = function(){
   request.onreadystatechange = function (){
      if (request.readyState === XMLHttpRequest.Done) // httprequest is completed
      {
-         if (request.status == 200)
+         if (request.status === 200)
          {
               var counter = request.responseText;
               var span = document.getElementById('count');
@@ -22,6 +22,6 @@ button.onclick = function(){
   };
   // make the actual request to the web page
   request.open('GET','http://sureshcerebral.imad.hasura-app.io/counter',true);
-  request.send(NULL);
+  request.send(null);
 
 };
