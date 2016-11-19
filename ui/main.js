@@ -22,6 +22,6 @@ button.onclick = function(){
   };
   // make the actual request to the web page
   request.open('GET','http://sureshcerebral.imad.hasura-app.io/counter',true);
-  request.send(null);
+  request.send(NULL);
 
 };
