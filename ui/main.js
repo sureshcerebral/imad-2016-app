@@ -8,7 +8,7 @@ button.onclick = function(){
   
   // capture the response into a var
   request.onreadystatechange = function (){
-     if (request.readyState === XMLHttpRequest.Done) // httprequest is completed
+     if (request.readyState === XMLHttpRequest.DONE) // httprequest is completed
      {
          if (request.status === 200)
          {
