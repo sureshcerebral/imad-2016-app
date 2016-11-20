@@ -27,8 +27,6 @@ button.onclick = function(){
 };
 
 // name input display
-var nameInput = document.getElementById('name');
-var name = nameInput.value;
 var submit = document.getElementById('submit_btn');
 
 submit.onclick = function(){
@@ -57,7 +55,9 @@ submit.onclick = function(){
       
   };
   // make the actual request to the web page
-  request.open('GET','http://sureshcerebral.imad.hasura-app.io/counter',true);
-  request.send(null);  
+    var nameInput = document.getElementById('name');
+    var name = nameInput.value;
+    request.open('GET','http://sureshcerebral.imad.hasura-app.io/counter',true);
+    request.send(null);  
   
 };
