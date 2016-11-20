@@ -34,14 +34,30 @@ var submit = document.getElementById('submit_btn');
 submit.onclick = function(){
   
   // make a server request and send the name
+  // make a request object
+  var request = new XMLHttpRequest();
   
-  //capture a list of the names and render it as list
-  var names = ['name1','name2','name3','name4'];
-  var list = '';
-  for (var i=0;i<names.length;i++){
-    list += '<li>' + names[i] + '</li>';     
-  }
-  var sl = document.getElementById('nameList');
-  sl.innerHTML = list;
+  // capture the response into a var
+  request.onreadystatechange = function (){
+     if (request.readyState === XMLHttpRequest.DONE) // httprequest is completed
+     {
+         if (request.status === 200)
+         {
+              var names = request.responseText;
+              names = JSON.parse(names);
+              var list = '';
+              for (var i=0;i<names.length;i++){
+                list += '<li>' + names[i] + '</li>';     
+              }
+              var sl = document.getElementById('nameList');
+              sl.innerHTML = list;
+         }
+     }
+     // else means do nothing and wait for it to complete..
+      
+  };
+  // make the actual request to the web page
+  request.open('GET','http://sureshcerebral.imad.hasura-app.io/counter',true);
+  request.send(null);  
   
 };
