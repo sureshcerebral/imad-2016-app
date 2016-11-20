@@ -57,7 +57,8 @@ submit.onclick = function(){
   // make the actual request to the web page
     var nameInput = document.getElementById('name');
     var name = nameInput.value;
-    request.open('GET','http://sureshcerebral.imad.hasura-app.io/counter',true);
+    request.open('GET','http://sureshcerebral.imad.hasura-app.io/submit-name?name='+name,true);
+    //request.open('GET','http://localhost:8080/submit-name?name='+name',true);
     request.send(null);  
   
 };
