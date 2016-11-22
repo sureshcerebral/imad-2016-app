@@ -1,46 +1,55 @@
 var express = require('express');
 var morgan = require('morgan');
 var path = require('path');
-
+var Pool = require('pg').Pool;
+var config = {
+  host: 'db.imad.hasura-app.io',
+  port: '5432',
+  user: 'sureshcerebral',
+  database: 'sureshcerebral',
+  password:  process.env.DB_PASSWORD
+};
 var app = express();
 app.use(morgan('combined'));
 
-var articles = {
-    articleOne:{
-        title:'Article One : Suresh ',
-        heading:'Article One',
-        date:'November 1, 2016',
-        content:`
-            <p>
-                This is article one the content of which will be added shortly.
-            </p>
-            <p>
-                This is the second para of the article which is yet to be modified.
-            </p>
-            <p>
-                This is the third para of the article which is yet to be modified.
-            </p>`
-    
-        },
-    articleTwo:{
-        title:'Article Two',
-        heading:'Article Two',
-        date:'November 10, 2016',
-        content:`
-            <p>
-                This is article two the content of which will be added shortly.
-            </p>
-        `},
-    articleThree:{
-        title:'Article Three ',
-        heading:'Article Three',
-        date:'November 15, 2016',
-        content:`
-            <p>
-                This is article three the content of which will be added shortly.
-            </p>`
-        }
-};
+var pool = new Pool(config);
+
+//var articles = {
+//    articleOne:{
+//        title:'Article One : Suresh ',
+//        heading:'Article One',
+//        date:'November 1, 2016',
+//        content:`
+//            <p>
+//                This is article one the content of which will be added shortly.
+//            </p>
+//            <p>
+//                This is the second para of the article which is yet to be modified.
+//            </p>
+//            <p>
+//                This is the third para of the article which is yet to be modified.
+//            </p>`
+//    
+//        },
+//    articleTwo:{
+//        title:'Article Two',
+//        heading:'Article Two',
+//        date:'November 10, 2016',
+//        content:`
+//            <p>
+//                This is article two the content of which will be added shortly.
+//            </p>
+//        `},
+//    articleThree:{
+//        title:'Article Three ',
+//        heading:'Article Three',
+//        date:'November 15, 2016',
+//        content:`
+//            <p>
+//                This is article three the content of which will be added shortly.
+//            </p>`
+//        }
+//};
 
 function CreateTemplate(data){
     var title = data.title;
@@ -84,6 +93,22 @@ app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
 
+
+app.get('/test-db', function(req, res){
+  // make a request to the db with select
+  
+  pool.query('SELECT * FROM article',function(err,result){
+      if (err){
+        res.status(500).send(err.toString());    
+      }
+      else {
+          res.send(JSON.stringify(result.rows));
+      }
+      
+  });
+  // get the response and display result
+    
+});
 var counter = 0;
 app.get('/counter', function (req, res) {
   counter = counter + 1;
