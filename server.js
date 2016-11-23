@@ -20,7 +20,7 @@ var articles = {
         title:'Article One : Suresh ',
         heading:'Article One',
         date:'November 1, 2016',
-        content:`
+        content:``
    
         },
     articleTwo:{
