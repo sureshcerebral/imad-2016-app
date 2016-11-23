@@ -9,9 +9,9 @@ var config = {
   database: 'sureshcerebral',
   host: 'db.imad.hasura-app.io',
   port: '5432',
-  password: 'db-sureshcerebral-29517'
+  password: process.env.DB_PASSWORD //'db-sureshcerebral-29517'
 };
- //process.env.DB_PASSWORD
+ //
 
 var pool = new Pool(config);
 
