@@ -9,7 +9,7 @@ var config = {
   database: 'sureshcerebral',
   host: 'db.imad.hasura-app.io',
   port: '5432',
-  password: process.env.DB_PASSWORD //'db-sureshcerebral-29517'
+  password: 'db-sureshcerebral-29517' //process.env.DB_PASSWORD //
 };
  //
 
@@ -130,8 +130,20 @@ app.get('/:articleName', function (req, res) {
     //articleName refers to the object names like articleOne etc..
     // eg - articleName == articleOne;
     //articles[articleName] = {} gives the content of articleOne object  
-  var articleName = req.params.articleName;
-  res.send(CreateTemplate(articles[articleName]));
+
+  pool.query("SELECT * FROM article WHERE title='+req.params.articleName+'",function(err,result){
+      if (err){
+        res.status(500).send(err.toString());    
+      }
+      else {
+          if (result.rows.length ===0){
+              res.status(404).send('Article not found');
+          } else{
+              var articleData = result.rows[0];
+              res.send(CreateTemplate(articleData));
+          }
+      }
+  });
 });
 
 app.get('/ui/style.css', function (req, res) {
