@@ -126,7 +126,7 @@ app.get('/submit-name', function (req, res) {
     res.send(JSON.stringify(names));
 });
 
-app.get('/:articleName', function (req, res) {
+app.get('/articles/:articleName', function (req, res) {
     //articleName refers to the object names like articleOne etc..
     // eg - articleName == articleOne;
     //articles[articleName] = {} gives the content of articleOne object  
