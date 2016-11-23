@@ -120,7 +120,7 @@ app.get('/articles/:articleName', function (req, res) {
 
       // SELECT * FROM article where title='';DELETE from article where a='a
       // sql injection..
-      //pool.query("SELECT * FROM article WHERE title= '"+req.params.articleName+"'",function(err,result){
+      //pool.query("SELECT * FROM article WHERE title= '"+req.params.articleName+"'"
       pool.query("SELECT * FROM article WHERE title= $1",[req.params.articleName],function(err,result){
       if (err){
         res.status(500).send(err.toString());    
