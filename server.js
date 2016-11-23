@@ -15,42 +15,29 @@ var config = {
 
 var pool = new Pool(config);
 
-//var articles = {
-//    articleOne:{
-//        title:'Article One : Suresh ',
-//        heading:'Article One',
-//        date:'November 1, 2016',
-//        content:`
-//            <p>
-//                This is article one the content of which will be added shortly.
-//            </p>
-//            <p>
-//                This is the second para of the article which is yet to be modified.
-//            </p>
-//            <p>
-//                This is the third para of the article which is yet to be modified.
-//            </p>`
-//    
-//        },
-//    articleTwo:{
-//        title:'Article Two',
-//        heading:'Article Two',
-//        date:'November 10, 2016',
-//        content:`
-//            <p>
-//                This is article two the content of which will be added shortly.
-//            </p>
-//        `},
-//    articleThree:{
-//        title:'Article Three ',
-//        heading:'Article Three',
-//        date:'November 15, 2016',
-//        content:`
-//            <p>
-//                This is article three the content of which will be added shortly.
-//            </p>`
-//        }
-//};
+var articles = {
+    articleOne:{
+        title:'Article One : Suresh ',
+        heading:'Article One',
+        date:'November 1, 2016',
+        content:`
+   
+        },
+    articleTwo:{
+        title:'Article Two',
+        heading:'Article Two',
+        date:'November 10, 2016',
+        content:`
+
+        `},
+    articleThree:{
+        title:'Article Three ',
+        heading:'',
+        date:'November 15, 2016',
+        content:`
+ `
+        }
+};
 
 function CreateTemplate(data){
     var title = data.title;
