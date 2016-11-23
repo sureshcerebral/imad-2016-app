@@ -118,7 +118,10 @@ app.get('/articles/:articleName', function (req, res) {
     // eg - articleName == articleOne;
     //articles[articleName] = {} gives the content of articleOne object  
 
-  pool.query("SELECT * FROM article WHERE title='"+req.params.articleName+"'",function(err,result){
+      // SELECT * FROM article where title='';DELETE from article where a='a
+      // sql injection..
+      //pool.query("SELECT * FROM article WHERE title= '"+req.params.articleName+"'",function(err,result){
+      pool.query("SELECT * FROM article WHERE title= $1",[req.params.articleName],function(err,result){
       if (err){
         res.status(500).send(err.toString());    
       }
