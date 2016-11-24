@@ -1,32 +1,4 @@
-//code for counter end point
-var button = document.getElementById('counter');
-
-button.onclick = function(){
-  
-  // make a request object
-  var request = new XMLHttpRequest();
-  
-  // capture the response into a var
-  request.onreadystatechange = function (){
-     if (request.readyState === XMLHttpRequest.DONE) // httprequest is completed
-     {
-         if (request.status === 200)
-         {
-              var counter = request.responseText;
-              var span = document.getElementById('count');
-              span.innerHTML = counter.toString();
-         }
-     }
-     // else means do nothing and wait for it to complete..
-      
-  };
-  // make the actual request to the web page
-  request.open('GET','http://sureshcerebral.imad.hasura-app.io/counter',true);
-  request.send(null);
-
-};
-
-// name input display
+// username and password to login..
 var submit = document.getElementById('submit_btn');
 
 submit.onclick = function(){
@@ -41,24 +13,25 @@ submit.onclick = function(){
      {
          if (request.status === 200)
          {
-              var names = request.responseText;
-              names = JSON.parse(names);
-              var list = '';
-              for (var i=0;i<names.length;i++){
-                list += '<li>' + names[i] + '</li>';     
-              }
-              var sl = document.getElementById('nameList');
-              sl.innerHTML = list;
+            console.log('user logged in');
+            alert('Logged in successfully');
+         } else if (request.status===403){
+             alert('Username / password is incorrect');
+         } else if (request.status===500){
+             alert('Something went wrong in server');
          }
      }
      // else means do nothing and wait for it to complete..
       
   };
   // make the actual request to the web page
-    var nameInput = document.getElementById('name');
-    var name = nameInput.value;
-    request.open('GET','http://sureshcerebral.imad.hasura-app.io/submit-name?name='+name,true);
+    var username = document.getElementById('username').value;
+    var password = document.getElementById('password').value;
+    console.log(username);
+    console.log(password);
+    request.open('POST','http://sureshcerebral.imad.hasura-app.io/login',true);
+    request.setRequestHeader('Content-Type','application/json');
     //request.open('GET','http://localhost:8080/submit-name?name='+name',true);
-    request.send(null);  
+    request.send(JSON.stringify({username:username,password:password}));  
   
 };
