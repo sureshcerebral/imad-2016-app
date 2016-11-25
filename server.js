@@ -144,6 +144,11 @@ app.get('/check-login',function(req,res){
    
 });
 
+app.get('/logout', function(req,res){
+   
+   delete req.session.auth;
+   res.send('Logged out successfully');
+});
 
 app.get('/test-db', function(req, res){
   // make a request to the db with select
